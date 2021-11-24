@@ -23,6 +23,10 @@ RUN  apt-get -y update --allow-unauthenticated && \
   sshpass \
   software-properties-common \
   rsync \
+  iputils-arping \
+  iputils-clockdiff \
+  iputils-ping \
+  iputils-tracepath \
   zsh \
   fonts-powerline \
   zsh-syntax-highlighting
