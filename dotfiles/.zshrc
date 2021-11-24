@@ -26,8 +26,6 @@ source $ZSH/oh-my-zsh.sh
 
 RPROMPT="[%D{%m/%d/%y} - %*]"
 
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Vault Variables
 export VAULT_ADDR=http://vault01.bmrf.io
 

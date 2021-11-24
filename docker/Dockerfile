@@ -28,8 +28,7 @@ RUN  apt-get -y update --allow-unauthenticated && \
   iputils-ping \
   iputils-tracepath \
   zsh \
-  fonts-powerline \
-  zsh-syntax-highlighting
+  fonts-powerline 
 
 # Remote SSH fun
 RUN mkdir /var/run/sshd
@@ -60,12 +59,13 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -a 'bindkey "\$terminfo[kcuu1]" history-substring-search-up' \
     -a 'bindkey "\$terminfo[kcud1]" history-substring-search-down'
 
+RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # Copy Oh-My-ZSH to remote ssh user
 RUN cp -r /root/.oh-my-zsh /home/$USER/
 
 # Cleanup
 RUN apt-get clean && apt-get autoremove
-RUN  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN  rm -rf /tmp/* /var/tmp/*
 
 EXPOSE 22
 
