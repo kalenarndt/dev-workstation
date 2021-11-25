@@ -38,5 +38,27 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          repository: ${{ github.repository }}
+          tags: latest
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+
+# jobs:
+#   build:
+#     name: 'Build'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: "Build:checkout"
+#         uses: actions/checkout@v2
+#       - name: 'Build:dockerimage'
+#         uses: docker/build-push-action@v1
+#         with:
+#           registry: ghcr.io
+#           username: "kalenarndt"
+#           password: ${{ secrets.PAT }}
+#           repository: kalenarndt/dev-workstation
+#           tags: latest
