@@ -6,17 +6,16 @@ ARG SSHKEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWz+0sRMjwuEKQ57cMZesVavDXzUY7
 
 # Install Packages
 RUN apt-get update && apt-get -y install --no-install-recommends \
-  curl \ 
   wget \
   apt-utils \
   gpg-agent \
   locales-all \
+  locales \
   curl \
   ca-certificates \
   openssl \
   git \
   sudo \
-  unzip \
   httpie \
   openssh-server \
   sshpass \
@@ -26,7 +25,6 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   iputils-ping \
   iputils-tracepath \
   zsh \
-  fonts-powerline \
   && curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
   && apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
   && apt-get update \
@@ -36,6 +34,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   consul-terraform-sync \
   vault \
   packer \
+  && apt-get remove -y apt-utils \
   && apt-get clean \
   && apt-get autoremove \
   && rm -rf /tmp/* /var/tmp/* \
