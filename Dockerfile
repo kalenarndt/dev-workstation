@@ -17,6 +17,8 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   git \
   sudo \
   httpie \
+  less \
+  vim \
   openssh-server \
   software-properties-common \
   iputils-ping \
