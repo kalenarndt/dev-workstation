@@ -27,7 +27,8 @@ RPROMPT="[%D{%m/%d/%y} - %*]"
 # Vault Variables
 export VAULT_ADDR=http://vault01.bmrf.io
 
-
+git config --global user.email "$GITEMAIL"
+git config --global user.name "$GITUSERNAME"
 # Terraform Aliases
 alias tf='terraform'
 alias tfa='terraform apply'
