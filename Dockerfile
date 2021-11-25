@@ -34,8 +34,8 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   vault \
   packer \
   && apt-get remove -y apt-utils curl software-properties-common gpg-agent \
-  && apt-get clean \
-  && apt-get autoremove \
+  && apt-get clean -y \
+  && apt-get autoremove -y \
   && rm -rf /tmp/* /var/tmp/* \
   && rm -rf /var/lib/apt/lists/*
 
