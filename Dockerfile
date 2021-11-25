@@ -18,7 +18,6 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   sudo \
   httpie \
   openssh-server \
-  sshpass \
   software-properties-common \
   iputils-arping \
   iputils-clockdiff \
@@ -34,7 +33,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   consul-terraform-sync \
   vault \
   packer \
-  && apt-get remove -y apt-utils \
+  && apt-get remove -y apt-utils curl software-properties-common gpg-agent \
   && apt-get clean \
   && apt-get autoremove \
   && rm -rf /tmp/* /var/tmp/* \
