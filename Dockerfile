@@ -12,19 +12,15 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   gpg-agent \
   locales-all \
   curl \
-  htop \
   ca-certificates \
   openssl \
   git \
   sudo \
-  vim \
   unzip \
   httpie \
-  supervisor \
   openssh-server \
   sshpass \
   software-properties-common \
-  rsync \
   iputils-arping \
   iputils-clockdiff \
   iputils-ping \
@@ -42,7 +38,8 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   packer \
   && apt-get clean \
   && apt-get autoremove \
-  && rm -rf /tmp/* /var/tmp/*
+  && rm -rf /tmp/* /var/tmp/* \
+  && rm -rf /var/lib/apt/lists/*
 
 
 # Remote SSH fun

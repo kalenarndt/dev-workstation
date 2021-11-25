@@ -10,14 +10,12 @@ HIST_STAMPS="mm/dd/yyyy"
 # Plugins
 
 plugins=(
-  aws
   brew
   docker
   encode64
   git
   httpie
   last-working-dir
-  supervisor
   vscode
   zsh-syntax-highlighting
 )
