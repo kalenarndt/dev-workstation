@@ -10,6 +10,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
   wget \
   apt-utils \
   gpg-agent \
+  locales-all \
   curl \
   htop \
   ca-certificates \
