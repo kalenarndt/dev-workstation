@@ -19,23 +19,30 @@ RUN apk update && apk --no-cache add \
   httpie \
   zsh \
   openssh \
-  unzip
+  unzip \
+  && ssh-keygen -A \
+  && ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_key \
+  && rm -rf /var/cache/apk/*
 
 # Install Packer
 RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip \
-  && unzip packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/local/bin/
+  && unzip packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/local/bin/ \
+  && rm -rf packer_${PACKER_VERSION}_linux_amd64.zip
 
 # Install Terraform
 RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-  && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin/
+  && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin/ \
+  && rm -rf terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
 # Install Vault
 RUN wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip \
-  && unzip vault_${VAULT_VERSION}_linux_amd64.zip -d /usr/local/bin/
+  && unzip vault_${VAULT_VERSION}_linux_amd64.zip -d /usr/local/bin/ \
+  && rm -rf vault_${VAULT_VERSION}_linux_amd64.zip
 
 # Install Consul
 RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip \
-  && unzip consul_${CONSUL_VERSION}_linux_amd64.zip -d /usr/local/bin/
+  && unzip consul_${CONSUL_VERSION}_linux_amd64.zip -d /usr/local/bin/ \
+  && rm -rf consul_${CONSUL_VERSION}_linux_amd64.zip
 
 EXPOSE 22
 
