@@ -47,15 +47,15 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
 
 # Remote SSH fun
 RUN mkdir /var/run/sshd \
-&& useradd -ms /bin/zsh $USER \
-&& usermod -a -G sudo $USER \
-&& bash -c "echo \"$USER ALL=(ALL) NOPASSWD:ALL\" >> /etc/sudoers" \
-&& mkdir -p /home/$USER/.ssh \
-&& mkdir -p /home/$USER/code \
-&& touch /home/$USER/.ssh/authorized_keys \
-&& echo $SSHKEY > /home/$USER/.ssh/authorized_keys \
-&& chown -R $USER /home/$USER \
-&& sed -i "s/.*PubkeyAuthentication.*/PubkeyAuthentication yes/g" /etc/ssh/sshd_config
+  && useradd -ms /bin/zsh $USER \
+  && usermod -a -G sudo $USER \
+  && bash -c "echo \"$USER ALL=(ALL) NOPASSWD:ALL\" >> /etc/sudoers" \
+  && mkdir -p /home/$USER/.ssh \
+  && mkdir -p /home/$USER/code \
+  && touch /home/$USER/.ssh/authorized_keys \
+  && echo $SSHKEY > /home/$USER/.ssh/authorized_keys \
+  && chown -R $USER /home/$USER \
+  && sed -i "s/.*PubkeyAuthentication.*/PubkeyAuthentication yes/g" /etc/ssh/sshd_config
 
 COPY dotfiles/.zshrc /home/$USER/.zshrc
 
@@ -67,7 +67,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -a 'bindkey "\$terminfo[kcud1]" history-substring-search-down'
 
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting \
-&& cp -r /root/.oh-my-zsh /home/$USER/
+  && cp -r /root/.oh-my-zsh /home/$USER/
 
 EXPOSE 22
 
