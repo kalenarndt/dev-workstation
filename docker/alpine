@@ -1,0 +1,30 @@
+FROM alpine:latest
+
+LABEL Maintainer = "Kalen Arndt <me@kalen.sh>"
+
+RUN mkdir $HOME
+RUN sed -i '/edge/s/^#//' /etc/apk/repositories
+RUN apk update && apk --no-cache add \
+  git \
+  less \
+  shadow \
+  vim \
+  htop \
+  curl \
+  wget \
+  httpie \
+  zsh \
+  unzip
+
+# Install Packer
+RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip
+RUN unzip packer_${PACKER_VERSION}_linux_amd64.zip
+RUN mv packer /usr/local/bin
+
+# Install Terraform
+RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+RUN unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin/
+
+# Install Vault
+RUN wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
+RUN unzip vault_${VAULT_VERSION}_linux_amd64.zip -d /usr/local/bin/
