@@ -5,10 +5,11 @@ ARG USER=kalen
 ARG SSHKEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWz+0sRMjwuEKQ57cMZesVavDXzUY7MBeeoTwj8lScbI6DeWkBgDShYYamXloLP8egx2FSHmPpp0EakhEjq2Bhlx0h+x69SJB29Gw8w3NdMCmXMOR3fxaqjafau60elHYCBWmhBkkauSUptwZaHX10kQcWjJewtAIpcp81IzVdzg7/AbY4xcteDo9fa9BrHWhh0yAl+KTduHBbMFg2mCxIIRwqqdYNibIGV70+tHNyBi6H4qYJ+Ph2t7PIWKWGBsBHPWmyvzrN+NKy33GBDwiXaRxq7nHRn5/BFMStPu1QDN9aKS1e06ebIgrt/cuhwrjHMWEI8sBs9EzOcBuPBS5Vs9yNroJodhuU870XE5ubn3smZwjTObkhhfZKMLr6DB7J7ZEuMRMbTGaeFk7N/fTEavhF884xeHX8p3dOOanwV146spqJOph4grcGJ45gRJn/DlyHoQRrz/qgSy0xwDV+APvzo3wmy2Twlr4qPsbto797AJRhNcphIRrxyVbu/J8="
 
 # Install Packages
-RUN apt-get -y install --no-install-recommends \
+RUN apt-get update && apt-get -y install --no-install-recommends \
   curl \ 
   wget \
   apt-utils \
+  gpg-agent \
   curl \
   htop \
   ca-certificates \
@@ -29,14 +30,10 @@ RUN apt-get -y install --no-install-recommends \
   iputils-tracepath \
   zsh \
   fonts-powerline \
-  && apt-get autoremove \
-  && rm -rf /tmp/* /var/tmp/*
-
-# HashiCorp Repos
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-RUN apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
+  && curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
+  && apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
   consul \
   terraform \
   consul-terraform-sync \
@@ -45,6 +42,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean \
   && apt-get autoremove \
   && rm -rf /tmp/* /var/tmp/*
+
 
 # Remote SSH fun
 RUN mkdir /var/run/sshd \
